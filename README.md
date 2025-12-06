@@ -9,31 +9,177 @@
 # zsh-config
 
 Configuración personalizada de Zsh para servidores Linux (GAIA, TERMINUS y futuros VPS).  
-Incluye un sistema modular para el prompt, funciones de abreviación inteligente de rutas y un comando interactivo para cambiar estilos dinámicamente.
+Incluye un prompt modular, funciones inteligentes para abreviar rutas, un comando para cambiar estilos dinámicamente y soporte liviano para plugins como autosuggestions y syntax highlighting, sin depender de frameworks pesados como Oh My Zsh.
+
+---
 
 ## ✨ Características
 
-- Prompt personalizado con acortamiento dinámico del `PWD`.
-- Tres estilos de acortamiento:
-  - **elipsis** — abrevia segmentos largos con `abc...xyz`
-  - **initials** — usa solo iniciales excepto el último segmento
-  - **mixed** — mezcla segmentos completos, iniciales y compresión central
-- Comando interactivo `chsps` para cambiar el estilo:
+- Prompt con acortamiento inteligente de `$PWD`.
+- Tres estilos de abreviación:
+  - **elipsis** — segmentos largos se muestran como `abc...xyz`
+  - **initials** — segmentos intermedios muestran iniciales (`w/s/p/...`)
+  - **mixed** — combinación equilibrada de ambos estilos
+- Comando `chsps` para cambiar estilos:
   - `chsps elipsis`
   - `chsps initials`
   - `chsps mixed`
-  - `chsps next` (rota entre los estilos)
-- Configuración modular:
-  - `lib/shorten.zsh` — funciones de acortamiento
-  - `lib/prompt.zsh` — configuración del prompt
-  - `lib/chsps.zsh` — comando para cambiar estilos
-- Instalación mediante `Makefile`.
+  - `chsps next`
+- Estructura modular:
+  - `lib/shorten.zsh`
+  - `lib/prompt.zsh`
+  - `lib/chsps.zsh`
+  - `lib/plugins.zsh`
+- Plugins opcionales:
+  - `zsh-autosuggestions`
+  - `zsh-syntax-highlighting`
+- Makefile para instalación, actualización y desinstalación.
+
+---
 
 ## 📦 Instalación
 
-Clonar el repo en el home:
+Clonar el repositorio:
 
 ```bash
+git clone git@github.com:jmouriz/zsh-config.git
+cd zsh-config
+```
+
+(Con HTTPS si preferís)
+
+```bash
+git clone https://github.com/jmouriz/zsh-config.git
+```
+
+### (Opcional) Instalar plugins
+
+```bash
+make plugins
+```
+
+### Instalar en tu sistema
+
+```bash
+<<<<<<< HEAD
 git clone https://github.com/jmouriz/zsh-config ~/.zsh-config
 cd ~/.zsh-config
+=======
+>>>>>>> c1a6d5b (Initial zsh-config with prompt, shorten functions and plugins loader)
 make install
+```
+
+Esto crea `~/.zsh-config` y agrega:
+
+```bash
+source ~/.zsh-config/zshrc
+```
+
+a tu `~/.zshrc` si no estaba.
+
+Luego recargá:
+
+```bash
+source ~/.zshrc
+```
+
+---
+
+## 🔧 Uso
+
+### Cambiar estilo del prompt
+
+```bash
+chsps elipsis
+chsps initials
+chsps mixed
+chsps next
+```
+
+### Ver estilo actual
+
+```bash
+chsps
+```
+
+### Actualizar configuración
+
+```bash
+make update
+```
+
+### Desinstalar todo
+
+```bash
+make uninstall
+```
+
+---
+
+## 🧩 Plugins
+
+Los plugins se cargan desde `lib/plugins.zsh` si están presentes.
+
+### Instalar plugins
+
+```bash
+make plugins
+make install
+```
+
+### Activar / desactivar plugins por servidor
+
+En tu `~/.zshrc`:
+
+```bash
+export ENABLE_ZSH_AUTOSUGGESTIONS=1
+export ENABLE_ZSH_SYNTAX_HIGHLIGHTING=1
+source ~/.zsh-config/zshrc
+```
+
+Para desactivar:
+
+```bash
+export ENABLE_ZSH_AUTOSUGGESTIONS=0
+export ENABLE_ZSH_SYNTAX_HIGHLIGHTING=0
+```
+
+---
+
+## 📁 Estructura del proyecto
+
+```text
+zsh-config/
+├── Makefile
+├── README.md
+├── zshrc
+├── lib/
+│   ├── prompt.zsh
+│   ├── shorten.zsh
+│   ├── chsps.zsh
+│   └── plugins.zsh
+└── plugins/
+    ├── zsh-autosuggestions/        # opcional
+    └── zsh-syntax-highlighting/    # opcional
+```
+
+---
+
+## 🛠 Ideas para expansión futura
+
+- Detectar el ancho de la terminal y cambiar el estilo automáticamente.
+- Integrar información de Git compacta (branch y estado).
+- Cambiar colores del prompt según host (GAIA / TERMINUS).
+- Indicadores ligeros: exit status, tiempo de ejecución, carga del sistema.
+- `make deploy-hosts` para instalar en varios servidores vía SSH + rsync.
+
+---
+
+## 📜 Licencia
+
+Libre uso personal.  
+Si este repo te resulta útil, una ⭐ en GitHub siempre se agradece.
+
+---
+
+Hecho con ❤️, Zsh y obsesión por los prompts.
