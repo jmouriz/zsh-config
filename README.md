@@ -61,11 +61,8 @@ make plugins
 ### Instalar en tu sistema
 
 ```bash
-<<<<<<< HEAD
 git clone https://github.com/jmouriz/zsh-config ~/.zsh-config
 cd ~/.zsh-config
-=======
->>>>>>> c1a6d5b (Initial zsh-config with prompt, shorten functions and plugins loader)
 make install
 ```
 
