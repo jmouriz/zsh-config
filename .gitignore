@@ -1,0 +1,4 @@
+plugins/
+*.swp
+*.tmp
+.DS_Store
