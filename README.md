@@ -34,6 +34,6 @@ Incluye un sistema modular para el prompt, funciones de abreviación inteligente
 Clonar el repo en el home:
 
 ```bash
-git clone https://github.com/tuusuario/zsh-config ~/.zsh-config
+git clone https://github.com/jmouriz/zsh-config ~/.zsh-config
 cd ~/.zsh-config
 make install
