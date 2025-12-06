@@ -1,4 +1,17 @@
+# Plugins externos (se gestionan con make plugins)
 plugins/
+
+# Archivos temporales de editores
+*~
 *.swp
-*.tmp
+*.swo
+
+# macOS
 .DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Otros artefactos potenciales
+*.log
